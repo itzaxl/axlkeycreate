@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="ar">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>انشاء مفتاح خطوه اخيرة. Axl</title>
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial}
+
+body{min-height:100vh;background:#000;color:#fff;overflow:hidden}
+
+/* stars */
+
+.stars{position:fixed;inset:0;background:
+
+radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+
+radial-gradient(1px 1px at 80% 40%, #fff, transparent),
+
+radial-gradient(1px 1px at 50% 70%, #fff, transparent),
+
+radial-gradient(1px 1px at 10% 80%, #fff, transparent),
+
+radial-gradient(2px 2px at 70% 20%, #fff, transparent);
+
+background-size:220px 220px;
+
+animation:stars 30s linear infinite;z-index:-1}
+
+@keyframes stars{from{background-position:0 0}to{background-position:-1400px 1400px}}
+
+/* page */
+
+.page{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;padding:20px}
+
+/* card */
+
+.card{width:360px;padding:25px;border-radius:22px;background:rgba(255,255,255,0.08);backdrop-filter:blur(18px);text-align:center}
+
+/* buttons */
+
+.btn{width:100%;padding:15px;margin:10px 0;border:none;border-radius:16px;font-size:16px;cursor:pointer;transition:.25s}
+
+.btn:active{transform:scale(.95)}
+
+.create{background:linear-gradient(180deg,#ffd95a,#ffb700);color:#000;font-weight:bold}
+
+.youtube{background:linear-gradient(180deg,#ff3b3b,#cc0000)}
+
+.telegram{background:linear-gradient(180deg,#2aa8e9,#0077b5)}
+
+.done{background:linear-gradient(180deg,#3cff9a,#00c46a);color:#000;font-weight:bold}
+
+/* timer */
+
+.timer{display:none;margin-top:8px;height:6px;background:rgba(255,255,255,.2);border-radius:10px;overflow:hidden}
+
+.fill{height:100%;width:0%;background:#fff;transition:width 1s linear}
+
+/* key */
+
+.key{display:none;margin-top:15px;padding:14px;border-radius:14px;background:linear-gradient(180deg,#ffd95a,#ffb700);color:#000;font-weight:bold;font-size:18px}
+
+h1{margin-bottom:10px}
+
+p{opacity:.85;font-size:14px}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="page">
+
+<div class="card">
+
+    <h1>AXL KEY</h1>
+
+    <p>اضغط على زر إنشاء المفتاح للبدء</p>
+
+    <button class="btn create" onclick="start()">إنشاء مفتاح</button>
+
+    <!-- TASKS -->
+
+    <div class="task" data-link="https://t.me/dxlrob">
+
+        <button class="btn telegram">Telegram dxlrob</button>
+
+        <div class="timer"><div class="fill"></div></div>
+
+    </div>
+
+    <div class="task" data-link="https://youtube.com/@kroloex?si=pF3cU7VErMix3iIq">
+
+        <button class="btn youtube">YouTube Kroloex</button>
+
+        <div class="timer"><div class="fill"></div></div>
+
+    </div>
+
+    <div class="task" data-link="https://t.me/mmcmy">
+
+        <button class="btn telegram">Telegram mmcmy</button>
+
+        <div class="timer"><div class="fill"></div></div>
+
+    </div>
+
+    <div class="task" data-link="https://youtube.com/@itzdevaxl?si=rTXZ4g4c72qv2c3R">
+
+        <button class="btn youtube">YouTube AXL</button>
+
+        <div class="timer"><div class="fill"></div></div>
+
+    </div>
+
+    <!-- key -->
+
+    <div class="key" id="keyBox">axlkey1</div>
+
+    <button class="btn create" id="copyBtn" style="display:none" onclick="copyKey()">نسخ المفتاح</button>
+
+</div>
+
+</div>
+
+<script>
+
+const tasks = document.querySelectorAll(".task");
+
+let current = 0;
+
+// إخفاء أزرار Task قبل البدء
+
+tasks.forEach(t=>{
+
+    t.querySelector("button").style.display="none";
+
+});
+
+function start(){
+
+    document.querySelector(".create").style.display="none";
+
+    runTask();
+
+}
+
+function runTask(){
+
+    if(current >= tasks.length){
+
+        document.getElementById("keyBox").style.display="block";
+
+        document.getElementById("copyBtn").style.display="block";
+
+        return;
+
+    }
+
+    const task = tasks[current];
+
+    const btn = task.querySelector("button");
+
+    const timer = task.querySelector(".timer");
+
+    const fill = task.querySelector(".fill");
+
+    btn.style.display="block";
+
+    btn.onclick = ()=>{
+
+        window.open(task.dataset.link,"_blank");
+
+        timer.style.display="block";
+
+        let time = 10; // مدة Task 10 ثواني
+
+        fill.style.width="0%";
+
+        const interval = setInterval(()=>{
+
+            time--;
+
+            fill.style.width = ((10-time)/10)*100 + "%";
+
+            if(time <= 0){
+
+                clearInterval(interval);
+
+                btn.className="btn done";
+
+                btn.textContent="✔ تم";
+
+                timer.style.display="none";
+
+                current++;
+
+                runTask();
+
+            }
+
+        },1000);
+
+    };
+
+}
+
+function copyKey(){
+
+    navigator.clipboard.writeText("axlkey1");
+
+    document.getElementById("copyBtn").textContent="✔ تم النسخ";
+
+}
+
+</script>
+
+</body>
+
+</html>
