@@ -7,7 +7,7 @@ local Lighting = game:GetService("Lighting")
 local player = Players.LocalPlayer
 
 --==================== SETTINGS ====================--
-local KEY = "axlkey1"
+local KEY = "axlaxlrolebb999key"
 local KEY_LINK = "https://itzaxl.github.io/aclkey/"
 local TELEGRAM = "https://t.me/AXLKEYBOT"
 --================================================--
